@@ -1,23 +1,28 @@
 <h4 class="animated fadeIn fast">Heroes - <small>Marvel y DC</small></h4>
 
 <div class="row row-cols-1 row-cols-md-3 g-4 animated fadeIn">
-  <div class="col" *ngFor="let heroe of heroes">
+  <div class="col" *ngFor="let heroe of heroes; let i = index">
     <div class="card">
       <img class="card-img-top" [src]="heroe.img" alt="...">
       <div class="card-body">
         <h5 class="card-title">{{heroe.nombre}}</h5>
         <p class="card-text">
-          {{heroe.bio}}
+          {{(heroe.bio.length>125)? (heroe.bio | slice:0:125)+'..':(heroe.bio)}}
         </p>
         <p class="card-text">
           <small class="text-muted">{{heroe.aparicion}}</small>
         </p>
+
         <button
+          (click)="verHeroe(i)"
           type="button"
           class="btn btn-outline-primary"
         >
           Ver más...
         </button>
+        <!--
+          <a [routerLink]="['/heroe',i]" class="btn btn-outline-primary">Ver mas...</a>
+        -->
       </div>
     </div>
   </div>
